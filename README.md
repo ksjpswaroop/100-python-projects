@@ -1,6 +1,5 @@
 Mega Project List
 ========
-
 ## Credits
 
 This repo was compiled by [Karan Goel](http://twitter.com/karangoel).
