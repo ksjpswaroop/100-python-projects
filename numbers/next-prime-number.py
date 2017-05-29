@@ -12,10 +12,10 @@ def is_prime():
 def msg():
     x = is_prime()
     for value in range(len(x)):
-        inpt = raw_input("Show more prime numbers? Y/N: ")
+        inpt = input("Show more prime numbers? Y/N: ")
         if inpt == 'N' or inpt == 'n':
             return 0
         elif inpt == 'Y' or inpt == 'y':
-            print x[value]
+            print (x[value])
 
 msg()
