@@ -12,8 +12,8 @@ def prime_factor(n):
     return prime_list
 
 def msg():
-    inpt = raw_input("Type a number: ")
+    inpt = input("Type a number: ")
     x = prime_factor(int(inpt))
-    print x
+    print (x)
 
 msg()
