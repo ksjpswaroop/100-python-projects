@@ -7,9 +7,9 @@ def total_cost(w, h, c):
         return total
 
 def msg():
-    width = raw_input("Type width: ")
-    height = raw_input("Type height: ")
-    cost = raw_input("Type cost of tile: ")
+    width = input("Type width: ")
+    height = input("Type height: ")
+    cost = input("Type cost of tile: ")
     x = total_cost(int(width), int(height), int(cost))
     print ("Total cost of tiles: %s" % x)
 
