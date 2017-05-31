@@ -1,5 +1,7 @@
 import math
-def convertion(dec, bi):
+import re
+
+def dectobi(dec):
     binary = []
     while int(dec) >= 1:
         if int(dec) % 2 == 0:
@@ -10,6 +12,7 @@ def convertion(dec, bi):
     binary = binary[::-1]
     print(binary)
 
+def bitodec(bi):
     decimal = []
     bi = list(map(int, str(bi)))
     bi = bi[::-1]
@@ -19,10 +22,18 @@ def convertion(dec, bi):
 
 
 
+def bincheck(inpt_2):
+    is_bin = re.compile(r"[01]+").match
+    if bool(is_bin(inpt_2)):
+        bitodec(int(inpt_2))
+    else:
+        print("Not a binary")
+
 
 def msg():
     inpt_1 = input("Give decimal number: ")
     inpt_2 = input("Give binary number: ")
-    convertion(int(inpt_1),int(inpt_2))
+    dectobi(int(inpt_1))
+    bincheck(inpt_2)
 
 msg()
