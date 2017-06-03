@@ -1,13 +1,11 @@
 def temprtr(x):
-    f = -17.2222222
-    c =  38.8
     ch = input("Select:\n 1.F to C \n 2.C to F \n")
     temp = input("Number: ")
     if ch == "1":
-        print(float(temp) / f)
+        print((float(temp) - 32) * 5/9)
 
     elif ch == "2":
-        print(float(temp) / c)
+        print(float(temp) * 9/5 + 32)
 
     else:
         print("Wrong input")
