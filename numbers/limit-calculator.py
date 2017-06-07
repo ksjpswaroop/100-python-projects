@@ -1,25 +1,17 @@
 from sympy import *
 
-def limit(fx, l):
+def limitcalc(fx, l):
   x = symbols('x')
-  r = limit((fx),x,l)
+  if l == 'oo':
+      r = limit(fx, x, l)
+  else:
+      r = limit(fx, x, int(l))
   print(r)
-
 
 
 def msg():
   inpt_1 = input("Give f(x): ")
-  inpt_2 = input("Give limit: ")
-  limit(inpt_1,inpt_2)
+  inpt_2 = input("Give limit ('oo' for infinite): ")
+  limitcalc(inpt_1,inpt_2)
 
 msg()
-
-''''
-x = input("type f: ")
-y = input("Give limit: ")
-if 'x' in x:
-  print("test")
-  new = str.replace(x, y)
-  eval(new)
-print(x)
-''''
