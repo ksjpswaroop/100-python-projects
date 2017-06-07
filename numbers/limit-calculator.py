@@ -13,3 +13,13 @@ def msg():
   limit(inpt_1,inpt_2)
 
 msg()
+
+''''
+x = input("type f: ")
+y = input("Give limit: ")
+if 'x' in x:
+  print("test")
+  new = str.replace(x, y)
+  eval(new)
+print(x)
+''''
