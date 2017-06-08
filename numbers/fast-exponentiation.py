@@ -1,16 +1,20 @@
-def pow_fast(res,a,b):
-    if b == 1:
-        print(res)
+def pow_fast(a,b):
+    if b == 0:
+      return 1
     else:
-        res = res * a
-        b-=1
-        return pow_fast(res,a,b)
+        if(b % 2 == 0):
+            res = pow_fast(a, b / 2)
+            return res * res
+        else:
+            res = pow_fast(a, (b-1) / 2)
+            return res * res * a
+
 
 
 def msg():
     inpt_1 = input("Enter a: ")
     inpt_2 = input("Enter b: ")
-    pow_fast(int(inpt_1),int(inpt_1),int(inpt_2))
+    print(pow_fast(int(inpt_1),int(inpt_2)))
 
 
 
