@@ -10,7 +10,7 @@ def colalg(n):
       return colalg(n/2)
   else:
       step.append(1)
-      return colalg(n * 3)
+      return colalg(n * 3 + 1)
 
 
 
