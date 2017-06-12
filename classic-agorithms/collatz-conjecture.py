@@ -31,7 +31,16 @@ def mergesort(n):
 
 
 def bubblesort(n):
-    return 1
+    length = len(n)
+    d = 1
+    helper = 0
+    while length != 0:
+        if n[d-1] > n[d]:
+            helper = n[d]
+            n[d] = n[d-1]
+            n[d-1] = helper
+        length -= 1
+    return n
 
 
 
