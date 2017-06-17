@@ -1,16 +1,13 @@
-def graph(link):
-    node = {}
-    for i in range(0,len(link)):
-        #if i not in node[i]:
-        #node[i].append(link[i][1])
-        #node.insert(i,link[i][0])
-        #else:
-        #    node.insert(i,link[i])
-        node[link[i][0]] = link[i][1]
-        print(node)
+def find_graph(graph):
+    final = {}
+    for i,j in graph:
+        try:
+            final[i].append(j)
+        except KeyError:
+            final[i] = [j]
+    print(final)
 
 
 
-
-link = [[1,2],[2,3],[2,4],[3,4]]
-graph(link)
+link = [['A','B'],['B','C'],['B','D'],['C','D']]
+find_graph(link)
