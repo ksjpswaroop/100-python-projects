@@ -1,55 +1,55 @@
-'''
-pseudocode wiki
+#kruskal algorithm
+#code from https://github.com/israelst/
+parent = dict()
+rank = dict()
 
-KRUSKAL(G):
-1 A = ∅
-2 foreach v ∈ G.V:
-3    MAKE-SET(v)
-4 foreach (u, v) in G.E ordered by weight(u, v), increasing:
-5    if FIND-SET(u) ≠ FIND-SET(v):
-6       A = A ∪ {(u, v)}
-7       UNION(u, v)
-8 return A
+def make_set(vertice):
+    parent[vertice] = vertice
+    rank[vertice] = 0
 
+def find(vertice):
+    if parent[vertice] != vertice:
+        parent[vertice] = find(parent[vertice])
+    return parent[vertice]
 
+def union(vertice1, vertice2):
+    root1 = find(vertice1)
+    root2 = find(vertice2)
+    if root1 != root2:
+        if rank[root1] > rank[root2]:
+            parent[root2] = root1
+        else:
+            parent[root1] = root2
+            if rank[root1] == rank[root2]: rank[root2] += 1
 
-'''
+def kruskal(graph):
+    for vertice in graph['vertices']:
+        make_set(vertice)
 
+    minimum_spanning_tree = set()
+    edges = list(graph['edges'])
+    edges.sort()
+    for edge in edges:
+        weight, vertice1, vertice2 = edge
+        if find(vertice1) != find(vertice2):
+            union(vertice1, vertice2)
+            minimum_spanning_tree.add(edge)
+    return minimum_spanning_tree
 
-
-
-def tree(graph,start):
-    nodes = []
-    final = {}
-
-    for node in graph:
-        nodes.append(node)
-
-
-    #while nodes:
-    for i in range(len(graph)):
-        #print(graph[i])
-        #nodes.remove(graph[i])
-
-
-
-
-
-'''
-graph = {'A': {'B':4,'F':2},
-         'B': {'C':6,'F':5},
-         'C': {'F':1},
-         'F': {}
-         }
-
-'''
-graph = {'a': {'b':4,'f':2},
-         'b': {'c':6,'f':5},
-         'c': {'d':3,'f':1},
-         'd': {'e':2},
-         'e': {'f':4},
-         'f': {}
-         }
-
-
-print(tree(graph,'a'))
+graph = {
+        'vertices': ['A', 'B', 'C', 'D', 'E', 'F'],
+        'edges': set([
+            (1, 'A', 'B'),
+            (5, 'A', 'C'),
+            (3, 'A', 'D'),
+            (4, 'B', 'C'),
+            (2, 'B', 'D'),
+            (1, 'C', 'D'),
+            ])
+        }
+minimum_spanning_tree = set([
+            (1, 'A', 'B'),
+            (2, 'B', 'D'),
+            (1, 'C', 'D'),
+            ])
+assert kruskal(graph) == minimum_spanning_tree
