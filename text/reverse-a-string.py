@@ -1,10 +1,5 @@
 def reverse(string):
-    rev = []
-    for i in range(len(string)):
-        rev.append(string[i])
-    rev = rev[::-1]
-    return ''.join(str(x) for x in rev)  
-
+    return string[::-1]
 
 
 string = input("Enter a string: ")
