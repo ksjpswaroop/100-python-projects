@@ -6,32 +6,31 @@ class Application(tk.Frame):
         super().__init__(master)
         self.pack()
         self.create_menu()
-        self.NewFile()
+        #self.NewFile()
 
     def create_menu(self):
         self.open_file = tk.Button(self)
         self.open_file["text"] = "Open"
         self.open_file["command"] = self.OpenFile
-        self.open_file.pack(side="left")
+        self.open_file.pack(side="top")
 
         self.quit = tk.Button(self, text="Exit", fg="red", command=root.destroy)
-        self.quit.pack(side="right")
-
-    def NewFile(self):
-        pass
+        self.quit.pack(side="top")
 
     def OpenFile(self):
         inputFile = fdialog.askopenfile()
         with open(inputFile.name, 'r+') as f:
             data = f.read()
+            text.insert(0.0,data)
 
     def SaveFile(self):
         pass
-
 
 
 root = tk.Tk()
 app = Application(master=root)
 app.master.title("Text Editor")
 app.master.geometry("500x500")
+text = tk.Text(root, width=500, height=500)
+text.pack()
 app.mainloop()
