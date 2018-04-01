@@ -1,36 +1,42 @@
 import tkinter as tk
 import tkinter.filedialog as fdialog
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack()
-        self.create_menu()
-        #self.NewFile()
+def OpenFile():
+    global filename
+    text.delete(0.0, tk.END)
+    inputFile = fdialog.askopenfile()
+    filename = inputFile.name
+    with open(filename, 'r+') as f:
+        data = f.read()
+        text.insert(0.0,data)
 
-    def create_menu(self):
-        self.open_file = tk.Button(self)
-        self.open_file["text"] = "Open"
-        self.open_file["command"] = self.OpenFile
-        self.open_file.pack(side="top")
+def SaveFile():
+    global filename
+    savedText = text.get(0.0, tk.END)
+    with open(filename, 'w') as f:
+        data = f.write(savedText)
 
-        self.quit = tk.Button(self, text="Exit", fg="red", command=root.destroy)
-        self.quit.pack(side="top")
-
-    def OpenFile(self):
-        inputFile = fdialog.askopenfile()
-        with open(inputFile.name, 'r+') as f:
-            data = f.read()
-            text.insert(0.0,data)
-
-    def SaveFile(self):
-        pass
+def SaveAs():
+    global filename
+    filename = fdialog.asksaveasfile().name
+    savedText = text.get(0.0, tk.END)
+    with open(filename, 'w') as f:
+        data = f.write(savedText)
 
 
 root = tk.Tk()
-app = Application(master=root)
-app.master.title("Text Editor")
-app.master.geometry("500x500")
-text = tk.Text(root, width=500, height=500)
+root.title("Text Editor")
+root.geometry("800x600")
+
+text = tk.Text(root, width=800, height=600)
 text.pack()
-app.mainloop()
+
+menubar = tk.Menu(root)
+filemenu = tk.Menu(menubar)
+menubar.add_command(label="Open", command=OpenFile)
+menubar.add_command(label="Save", command=SaveFile)
+menubar.add_command(label="Save as", command=SaveAs)
+menubar.add_command(label="Exit", command=root.destroy)
+root.config(menu=menubar)
+
+root.mainloop()
