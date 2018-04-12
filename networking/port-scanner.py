@@ -26,6 +26,10 @@ def port_scanner(ip, port_range):
         print("Couldn't connect to server")
         raise SystemExit
 
+    except KeyboardInterrupt:
+        print("\nKeyboard Exit")
+        raise SystemExit
+
 
 def valid_ip(ip):
     try:
@@ -39,17 +43,20 @@ def valid_ip(ip):
 
 def valid_range(port_range):
     port_range = port_range.split("-")
-    valid_range = range(1, 1025)
 
-    if port_range[0] >= port_range[1]:
+    for port in port_range:
+        if 1 > int(port) > 1025:
+            print("error range")
+            return False
+
+    if int(port_range[0]) >= int(port_range[1]):
         print("error range")
         return False
 
-    if port_range[0] and port_range[1] in valid_range:
-        return True
-        
+    return True
 
 #console
+#max range 1-1025
 port_range = input("Port range: ")
 ip = input("IP: ")
 
