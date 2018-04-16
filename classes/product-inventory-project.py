@@ -32,3 +32,21 @@ class Product:
 
     def print_product(self):
         print("ID: {0}\nName: {1}\nPrice: {2}\nQuantity: {3}" .format(self.id, self.name, self.price, self.quantity))
+
+
+class Inventory:
+
+    def __init__(self):
+        self.product_list = []
+
+    def add_product(self, id):
+        self.product_list.append(id)
+
+    def remove_product(self, id):
+        self.product_list.remove(id)
+
+    def count_items(self):
+        print(len(self.product_list))
+
+    def print_inventory(self):
+        print(self.product_list)
