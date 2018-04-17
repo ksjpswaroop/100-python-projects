@@ -7,9 +7,6 @@ from abc import ABC, abstractmethod
 
 class Account(ABC):
 
-    def __init__(self):
-        pass
-
     @abstractmethod
     def deposit(self):
         pass
@@ -22,11 +19,12 @@ class Account(ABC):
     def balance(self):
         pass
 
+
 class CheckingAccount(Account):
 
-    def __init__(self):
-        #super([object Object], self).__init__()
+    def __init__(self, id):
         self.total_balance = 3000
+        self.id = id
 
     def deposit(self, amount):
         try:
@@ -50,19 +48,18 @@ class CheckingAccount(Account):
         print("Balance: {}".format(self.total_balance))
 
 
-
 class SavingsAccount(Account):
 
-    def __init__(self):
-        #super([object Object], self).__init__()
+    def __init__(self, id):
         self.total_balance = 2120
+        self.id = id
 
     def deposit(self, amount):
         self.total_balance += amount
 
     def withdrawal(self, amount):
 
-        if amount >= self.total_balance:
+        if amount <= self.total_balance:
             self.total_balance -= amount
 
         else:
@@ -71,18 +68,19 @@ class SavingsAccount(Account):
     def balance(self):
         print("Balance: {}".format(self.total_balance))
 
+
 class BusinessAccount(Account):
 
-    def __init__(self):
-        #super([object Object], self).__init__()
+    def __init__(self, id):
         self.total_balance = 40311
+        self.id = id
 
     def deposit(self, amount):
         self.total_balance += amount
 
     def withdrawal(self, amount):
 
-        if amount >= self.total_balance:
+        if amount <= self.total_balance:
             self.total_balance -= amount
 
         else:
