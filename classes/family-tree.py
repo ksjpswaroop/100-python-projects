@@ -1,73 +1,44 @@
+'''
+Family Tree Creator
+Create a class called Person which will have a name, when they were born and when (and if) they died. Allow the user to create these Person classes and put them into a family tree structure. Print out the tree to the screen.
+'''
+
 class Person(object):
 
-    def __init__(self, fname, lname, born=None, died=None):
-        self.fname = fname
-        self.lname = lname
+    def __init__(self, name, born=None, died=None):
+        self.name = name
         self.born = born
         self.died = died
-        self.siblings_list = None
+        self.relations = {}
 
-    def parents(self, mother=None, father=None):
-        self.mother = mother
-        self.father = father
+    def add_relation(self, type, person):
+        if type not in self.relations.keys():
+            self.relations[type] = []
+        self.relations[type].append(person)
 
-    def siblings(self, *args):
-        self.siblings_list = []
-        for arg in args:
-            self.siblings_list.append(arg)
+    def get_relation(self, type):
+        return self.relations[type][0].name
 
-    def grandparents(self, granddad=None, grandmother=None):
-        self.granddad = granddad
-        self.grandmother = grandmother
+    def get_relations(self, type):
+        return self.relations[type]
 
+    def add_parents(self, mother, father):
+        mother.add_child(self)
+        father.add_child(self)
 
-    def get_members(self):
-        family_members = {"First name": self.fname,
-                          "Last name" : self.lname,
-                          "Grandfather": self.granddad,
-                          "Grandmother": self.grandmother,
-                          "Father": self.father,
-                          "Mother": self.mother,
-                          "Siblings": self.siblings_list
-                         }
+    def add_child(self, child):
+        self.add_relation("children", child)
+        child.add_relation("parents", self)
 
-        return family_members
+    def add_spouse(self, spouse):
+        self.add_relation("spouse", spouse)
+        spouse.add_relation("spouse", self)
 
+    def get_parents(self):
+        return self.get_relations("parents")
 
-class Relations(object):
+    def get_children(self):
+        return self.get_relations("children")
 
-    def __init__(self):
-        self.child = {}
-        self.partners = {}
-
-    def get_child(self, person):
-
-        #for grandfathers and grandmothers childs
-        #supposedly the child got its father's last name
-        father = person["Father"].split()[1]
-        mother = person["Mother"].split()[1]
-        if father in person["Grandfather"]:
-            self.child[person["Grandfather"]] = person["Father"]
-            self.child[person["Grandmother"]] = person["Father"]
-
-        elif mother in person["Grandfather"]:
-            self.child[person["Grandfather"]] = person["Mother"]
-            self.child[person["Grandmother"]] = person["Mother"]
-
-        #for person's childs
-        self.child[person["First name"] + " " + person["Last name"]] = person["Siblings"]
-
-        #parents childs
-        self.child[person["Mother"]] = person["First name"] + " " + person["Last name"]
-        self.child[person["Father"]] = person["First name"] + " " + person["Last name"]
-
-        return self.child
-
-
-    def get_partners(self, person):
-        self.partners[person["Grandfather"]] = person["Grandmother"]
-        self.partners[person["Grandmother"]] = person["Grandfather"]
-        self.partners[person["Father"]] = person["Mother"]
-        self.partners[person["Mother"]] = person["Father"]
-
-        return self.partners
+    def get_spouse(self):
+        return self.get_relation("spouse")
