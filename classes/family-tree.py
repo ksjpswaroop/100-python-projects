@@ -44,22 +44,30 @@ class Relations(object):
 
         #for grandfathers and grandmothers childs
         #supposedly the child got its father's last name
-        if person["Last name"] in person["Father"]:
+        father = person["Father"].split()[1]
+        mother = person["Mother"].split()[1]
+        if father in person["Grandfather"]:
             self.child[person["Grandfather"]] = person["Father"]
             self.child[person["Grandmother"]] = person["Father"]
 
-        elif person["Last name"] in person["Mother"]:
+        elif mother in person["Grandfather"]:
             self.child[person["Grandfather"]] = person["Mother"]
             self.child[person["Grandmother"]] = person["Mother"]
 
-        #for parents childs
-        self.child[person["Mother"]] = person["Siblings"]
-        self.child[person["Father"]] = person["Siblings"]
+        #for person's childs
+        self.child[person["First name"] + " " + person["Last name"]] = person["Siblings"]
+
+        #parents childs
+        self.child[person["Mother"]] = person["First name"] + " " + person["Last name"]
+        self.child[person["Father"]] = person["First name"] + " " + person["Last name"]
+
         return self.child
 
 
     def get_partners(self, person):
         self.partners[person["Grandfather"]] = person["Grandmother"]
+        self.partners[person["Grandmother"]] = person["Grandfather"]
         self.partners[person["Father"]] = person["Mother"]
+        self.partners[person["Mother"]] = person["Father"]
 
         return self.partners
