@@ -17,10 +17,19 @@ class Person(object):
         self.relations[type].append(person)
 
     def get_relation(self, type):
-        return self.relations[type][0].name
+        try:
+            if type is None:
+                pass
+            else:
+                return self.relations[type][0].name
+        except:
+            pass
 
     def get_relations(self, type):
-        return self.relations[type]
+        try:
+            return self.relations[type]
+        except:
+            return None
 
     def add_parents(self, mother, father):
         mother.add_child(self)
@@ -42,3 +51,22 @@ class Person(object):
 
     def get_spouse(self):
         return self.get_relation("spouse")
+
+
+def tree(person):
+    parents = [person.name]
+
+    if person.get_spouse() is not None:
+        parents.append(person.get_spouse())
+
+    if len(parents) == 1:
+        print(parents[0])
+    else:
+        print(parents[0], parents[1])
+
+    try:
+        for child in person.get_children():
+            #print('-----{}'.format(child))
+            tree(child)
+    except:
+        pass
