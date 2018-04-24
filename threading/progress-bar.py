@@ -7,11 +7,9 @@ import sys
 import urllib.request
 import os
 
-
-class Download(threading.Thread):
+class Download(object):
 
     def __init__(self, obj):
-        threading.Thread.__init__(self)
         self.obj = obj
 
     def file(self, link):
@@ -35,3 +33,28 @@ class Download(threading.Thread):
 
                     progress_dl += len(buffer)
                     f.write(buffer)
+
+                    #calling DownloadProgress class
+                    arr = [progress_dl, file_size]
+                    t1 = threading.Thread(target = self.obj.run, args = [arr,])
+                    t1.start()
+                    t1.join()
+
+
+class DownloadProgress(threading.Thread):
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self, arr):
+        progress_dl = arr[0]
+        file_size = arr[1]
+        p = float(progress_dl) / float(file_size)
+        status = r"{0}  [{1:.2%}]".format(progress_dl, p)
+        status = status + chr(8)*(len(status)+1)
+        sys.stdout.write(status)
+
+url = "add url"
+
+t1 = DownloadProgress()
+Download(t1).file(url)
