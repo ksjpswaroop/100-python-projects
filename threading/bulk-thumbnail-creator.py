@@ -23,5 +23,15 @@ def resize(img_list):
             print("cannot create thumbnail for image {}".format(img))
 
 
+def rename(img_list):
+    for img in img_list:
+        path = "images/thumbnail/"
+        old_file = os.path.join(path, img)
+        new_file = os.path.join(path, "thumb-" + img)
+        os.rename(old_file, new_file)
+
+
 img_list = [str(x) for x in range(1,34)]
-resize(img_list)
+
+#resize(img_list)
+#rename(img_list)
