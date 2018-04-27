@@ -197,7 +197,7 @@ Web
 
 **Scheduled Auto Login and Action** - Make an application which logs into a given site on a schedule and invokes a certain action and then logs out. This can be useful for checking web mail, posting regular content, or getting info for other applications and saving it to your computer.
 
-**Tumblr archive image scraper** - Scrape and save all the images from a given tubmlr blog archive page.
+**Tumblr Archive Image Scraper** - Scrape and save all the images from a given tubmlr blog archive page.
 
 **Content Management System** - Create a content management system (CMS) like Joomla, Drupal, PHP Nuke etc. Start small. *Optional: Allow for the addition of modules/addons.*
 
